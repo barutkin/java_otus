@@ -1,0 +1,43 @@
+plugins {
+    id 'idea'
+    id 'io.spring.dependency-management'
+    id 'com.github.johnrengelman.shadow' apply false
+}
+
+idea {
+    project {
+        languageLevel = 15
+    }
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+allprojects {
+    group 'in.barutk'
+    version '1.0-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+
+    apply plugin: 'io.spring.dependency-management'
+    dependencyManagement {
+        dependencies {
+            imports {
+                mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootDependenciesVersion}")
+            }
+            dependency("com.google.guava:guava:${guavaVersion}")
+        }
+    }
+}
+
+//print versions from BOM
+task managedVersions {
+    doLast {
+        dependencyManagement.managedVersions.each {
+            println it
+        }
+    }
+}
