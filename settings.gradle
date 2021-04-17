@@ -1,0 +1,12 @@
+pluginManagement {
+    plugins {
+        id 'io.spring.dependency-management' version "${dependencyManagementVersion}"
+        id 'com.github.johnrengelman.shadow' version "${shadowVersion}" apply false
+    }
+    repositories {
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'java_otus'
+include 'hw01-gradle'
